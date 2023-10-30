@@ -10,14 +10,14 @@ CREATE TABLE `Styles`
     `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     `style` NVARCHAR(160) NOT NULL,
     `price` NUMERIC(5,2) NOT NULL
-)
+);
 
 CREATE TABLE `Sizes`
 (
     `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     `caret` NUMERIC(5,2) NOT NULL,
     `price` NUMERIC(5,2) NOT NULL
-)
+);
 
 CREATE TABLE `Orders`
 (
@@ -28,4 +28,20 @@ CREATE TABLE `Orders`
     FOREIGN KEY(`metalId`) REFERENCES `Metals`(`id`),
     FOREIGN KEY(`styleId`) REFERENCES `Styles`(`id`),
     FOREIGN KEY(`sizeId`) REFERENCES `Sizes`(`id`)
-)
+);
+
+INSERT INTO `Metals` VALUES ('Sterling Silver', 12.42);
+INSERT INTO `Metals` VALUES ('14K Gold', 736.4);
+INSERT INTO `Metals` VALUES ('24K Gold', 1258.9);
+INSERT INTO `Metals` VALUES ('Platinum', 795.45);
+INSERT INTO `Metals` VALUES ('Palladium', 1241);
+
+INSERT INTO `Styles` VALUES ('Classic', 500);
+INSERT INTO `Styles` VALUES ('Modern', 710);
+INSERT INTO `Styles` VALUES ('Vintage', 965);
+
+INSERT INTO `Sizes` VALUES (0.5, 405);
+INSERT INTO `Sizes` VALUES (0.75, 782);
+INSERT INTO `Sizes` VALUES (1, 1470);
+INSERT INTO `Sizes` VALUES (1.5, 1997);
+INSERT INTO `Sizes` VALUES (2, 3638);
