@@ -30,18 +30,23 @@ CREATE TABLE `Orders`
     FOREIGN KEY(`sizeId`) REFERENCES `Sizes`(`id`)
 );
 
-INSERT INTO `Metals` VALUES ('Sterling Silver', 12.42);
-INSERT INTO `Metals` VALUES ('14K Gold', 736.4);
-INSERT INTO `Metals` VALUES ('24K Gold', 1258.9);
-INSERT INTO `Metals` VALUES ('Platinum', 795.45);
-INSERT INTO `Metals` VALUES ('Palladium', 1241);
+INSERT INTO `Metals` VALUES (null, 'Sterling Silver', 12.42);
+INSERT INTO `Metals` VALUES (null, '14K Gold', 736.4);
+INSERT INTO `Metals` VALUES (null, '24K Gold', 1258.9);
+INSERT INTO `Metals` VALUES (null, 'Platinum', 795.45);
+INSERT INTO `Metals` VALUES (null, 'Palladium', 1241);
 
-INSERT INTO `Styles` VALUES ('Classic', 500);
-INSERT INTO `Styles` VALUES ('Modern', 710);
-INSERT INTO `Styles` VALUES ('Vintage', 965);
+INSERT INTO `Styles` VALUES (null, 'Classic', 500);
+INSERT INTO `Styles` VALUES (null, 'Modern', 710);
+INSERT INTO `Styles` VALUES (null, 'Vintage', 965);
 
-INSERT INTO `Sizes` VALUES (0.5, 405);
-INSERT INTO `Sizes` VALUES (0.75, 782);
-INSERT INTO `Sizes` VALUES (1, 1470);
-INSERT INTO `Sizes` VALUES (1.5, 1997);
-INSERT INTO `Sizes` VALUES (2, 3638);
+INSERT INTO `Sizes` VALUES (null, 0.5, 405);
+INSERT INTO `Sizes` VALUES (null, 0.75, 782);
+INSERT INTO `Sizes` VALUES (null, 1, 1470);
+INSERT INTO `Sizes` VALUES (null, 1.5, 1997);
+INSERT INTO `Sizes` VALUES (null, 2, 3638);
+
+SELECT * FROM `Metals`;
+SELECT * FROM `Sizes`;
+SELECT * FROM `Styles`;
+SELECT * FROM `Orders`;
