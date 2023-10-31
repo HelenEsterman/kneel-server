@@ -31,3 +31,8 @@ class OrderView:
             orders = [dict(row) for row in query_results]
             orders_json_array = json.dumps(orders)
             return handler.response(orders_json_array, status.HTTP_200_SUCCESS.value)
+
+    def put(self, handler):
+        return handler.response(
+            "Functionality is not supported", status.HTTP_405_UNSUPPORTED_METHOD.value
+        )
