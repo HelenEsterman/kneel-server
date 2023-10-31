@@ -57,4 +57,5 @@ SELECT
                 s.id,
                 s.caret,
                 s.price
-                FROM Sizes s;
+                FROM Sizes s
+                WHERE s.id = 5;
