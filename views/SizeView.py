@@ -29,3 +29,8 @@ class SizeView:
             sizes = [dict(row) for row in query_results]
             sizes_json_array = json.dumps(sizes)
             return handler.response(sizes_json_array, status.HTTP_200_SUCCESS.value)
+
+    def delete(self, handler, pk):
+        return handler.response(
+            "Functionality is not supported", status.HTTP_405_UNSUPPORTED_METHOD.value
+        )
