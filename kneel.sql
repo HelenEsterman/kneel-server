@@ -54,7 +54,7 @@ SELECT * FROM `Orders`;
 
 SELECT * FROM `Metals`;
 SELECT 
-                m.id,
-                m.metal,
-                m.price
-                FROM Metals m;
+                s.id,
+                s.caret,
+                s.price
+                FROM Sizes s;

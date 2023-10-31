@@ -1,3 +1,3 @@
 class SizeView:
-    def get(self):
+    def get(self, handler, pk):
         pass
