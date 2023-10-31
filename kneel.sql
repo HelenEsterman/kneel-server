@@ -50,3 +50,11 @@ SELECT * FROM `Metals`;
 SELECT * FROM `Sizes`;
 SELECT * FROM `Styles`;
 SELECT * FROM `Orders`;
+
+
+SELECT * FROM `Metals`;
+SELECT 
+                m.id,
+                m.metal,
+                m.price
+                FROM Metals m;
