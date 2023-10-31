@@ -22,6 +22,18 @@ class JSONServer(HandleRequests):
                 status.HTTP_404_CLIENT_ERROR_RESOURCE_NOT_FOUND.value,
             )
 
+    def do_DELETE(self):
+        url = self.parse_url(self.path)
+        view = self.determine_view(url)
+
+        try:
+            view.delete(self, url["pk"])
+        except AttributeError:
+            return self.response(
+                "No view for that route",
+                status.HTTP_404_CLIENT_ERROR_RESOURCE_NOT_FOUND.value,
+            )
+
     def determine_view(self, url):
         """Lookup the correct view class to handle the requested route
 

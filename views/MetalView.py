@@ -29,3 +29,8 @@ class MetalView:
             metals = [dict(row) for row in query_results]
             metals_json_array = json.dumps(metals)
             return handler.response(metals_json_array, status.HTTP_200_SUCCESS.value)
+
+    def delete(self, handler, pk):
+        return handler.response(
+            "Functionality is not supported", status.HTTP_405_UNSUPPORTED_METHOD.value
+        )
