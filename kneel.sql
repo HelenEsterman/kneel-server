@@ -55,7 +55,7 @@ SELECT * FROM `Orders`;
 SELECT * FROM `Metals`;
 SELECT 
                 s.id,
-                s.caret,
+                s.style,
                 s.price
-                FROM Sizes s
-                WHERE s.id = 5;
+                FROM Styles s
+                WHERE s.id = 3;
