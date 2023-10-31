@@ -27,7 +27,7 @@ class JSONServer(HandleRequests):
         view = self.determine_view(url)
 
         try:
-            if view is OrderView:
+            if view.__module__ == "views.OrderView":
                 view.delete(self, url["pk"])
             else:
                 view.delete_put_post(self)
@@ -42,8 +42,8 @@ class JSONServer(HandleRequests):
         view = self.determine_view(url)
 
         try:
-            if view is OrderView:
-                view.update(self, self.get_request_body(), url["pk"])
+            if view.__module__ == "views.OrderView":
+                view.put(self)
             else:
                 view.delete_put_post(self)
         except AttributeError:
@@ -61,7 +61,7 @@ class JSONServer(HandleRequests):
         request_body = self.get_request_body()
         # Invoke the correct method on the view
         try:
-            if view is OrderView:
+            if view.__module__ == "views.OrderView":
                 view.post(self, request_body)
             else:
                 view.delete_put_post(self)
