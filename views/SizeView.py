@@ -30,7 +30,7 @@ class SizeView:
             sizes_json_array = json.dumps(sizes)
             return handler.response(sizes_json_array, status.HTTP_200_SUCCESS.value)
 
-    def delete(self, handler, pk):
+    def delete_put_post(self, handler):
         return handler.response(
             "Functionality is not supported", status.HTTP_405_UNSUPPORTED_METHOD.value
         )

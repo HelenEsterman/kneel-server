@@ -27,11 +27,48 @@ class JSONServer(HandleRequests):
         view = self.determine_view(url)
 
         try:
-            view.delete(self, url["pk"])
+            if view is OrderView:
+                view.delete(self, url["pk"])
+            else:
+                view.delete_put_post(self)
         except AttributeError:
             return self.response(
                 "No view for that route",
                 status.HTTP_404_CLIENT_ERROR_RESOURCE_NOT_FOUND.value,
+            )
+
+    def do_PUT(self):
+        url = self.parse_url(self.path)
+        view = self.determine_view(url)
+
+        try:
+            if view is OrderView:
+                view.update(self, self.get_request_body(), url["pk"])
+            else:
+                view.delete_put_post(self)
+        except AttributeError:
+            return self.response(
+                "No view for that route",
+                status.HTTP_404_CLIENT_ERROR_RESOURCE_NOT_FOUND.value,
+            )
+
+    def do_POST(self):
+        # Parse the URL
+        url = self.parse_url(self.path)
+        # Determine the correct view needed to handle the requests
+        view = self.determine_view(url)
+        # Get the request body
+        request_body = self.get_request_body()
+        # Invoke the correct method on the view
+        try:
+            if view is OrderView:
+                view.post(self, request_body)
+            else:
+                view.delete_put_post(self)
+        # Make sure you handle the AttributeError in case the client requested a route that you don't support
+        except AttributeError:
+            return self.response(
+                "Unable to post", status.HTTP_404_CLIENT_ERROR_RESOURCE_NOT_FOUND.value
             )
 
     def determine_view(self, url):
