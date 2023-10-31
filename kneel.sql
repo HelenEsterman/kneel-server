@@ -46,6 +46,9 @@ INSERT INTO `Sizes` VALUES (null, 1, 1470);
 INSERT INTO `Sizes` VALUES (null, 1.5, 1997);
 INSERT INTO `Sizes` VALUES (null, 2, 3638);
 
+INSERT INTO `Orders` VALUES (null, 1, 2, 3);
+INSERT INTO `Orders` VALUES (null, 3, 2, 1);
+
 SELECT * FROM `Metals`;
 SELECT * FROM `Sizes`;
 SELECT * FROM `Styles`;
