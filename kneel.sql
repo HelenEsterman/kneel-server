@@ -57,8 +57,9 @@ SELECT * FROM `Orders`;
 
 SELECT * FROM `Metals`;
 SELECT 
-                s.id,
-                s.style,
-                s.price
-                FROM Styles s
-                WHERE s.id = 3;
+                o.id,
+                o.metalId,
+                o.sizeId,
+                o.styleId
+                FROM `Orders` o
+                WHERE o.id = 2;
