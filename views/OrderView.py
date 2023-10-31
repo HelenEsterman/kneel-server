@@ -1,3 +1,3 @@
 class OrderView:
-    def get(self):
+    def get(self, handler, pk):
         pass
