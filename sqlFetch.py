@@ -49,3 +49,20 @@ def db_create(sql, data_tuple) -> int:
         db_cursor = conn.cursor()
         db_cursor.execute(sql, data_tuple)
         return db_cursor.lastrowid
+
+
+def db_delete(sql, pk) -> int:
+    """Delete a row from the database
+
+    Args:
+        sql (string): SQL string
+        pk (int): Primary key of item to delete
+
+    Returns:
+        int: Number of rows deleted
+    """
+    with sqlite3.connect("./kneeldiamonds.sqlite3") as conn:
+        conn.row_factory = sqlite3.Row
+        db_cursor = conn.cursor()
+        db_cursor.execute(sql, (pk,))
+        return db_cursor.rowcount

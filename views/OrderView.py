@@ -1,5 +1,5 @@
 import json
-from sqlFetch import db_get_single, db_get_all, db_create
+from sqlFetch import db_get_single, db_get_all, db_create, db_delete
 from nss_handler import status
 
 
@@ -58,4 +58,18 @@ class OrderView:
             return handler.response(
                 "Problem encountered when trying to carry out post request",
                 status.HTTP_500_SERVER_ERROR.value,
+            )
+
+    def delete(self, handler, pk):
+        number_of_rows_deleted = db_delete("DELETE FROM `Orders` WHERE id = ?", pk)
+
+        if number_of_rows_deleted:
+            return handler.response(
+                "",
+                status.HTTP_204_SUCCESS_NO_RESPONSE_BODY.value,
+            )
+        else:
+            return handler.response(
+                "Problem encountered when trying to carry out deletion request",
+                status.HTTP_404_CLIENT_ERROR_RESOURCE_NOT_FOUND.value,
             )
