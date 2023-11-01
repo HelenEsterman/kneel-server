@@ -1,5 +1,5 @@
 import json
-from sqlFetch import db_get_single, db_get_all
+from sqlFetch import db_get_single, db_get_all, db_create
 from nss_handler import status
 
 
@@ -36,3 +36,26 @@ class OrderView:
         return handler.response(
             "Functionality is not supported", status.HTTP_405_UNSUPPORTED_METHOD.value
         )
+
+    def post(self, handler, order_data):
+        sql = """
+            INSERT INTO `Orders` 
+            (metalId, sizeId, styleId) VALUES (?,?,?)"""
+        posted_order_id = db_create(
+            sql, (order_data["metalId"], order_data["sizeId"], order_data["styleId"])
+        )
+        order = {
+            "id": posted_order_id,
+            "metalId": order_data["metalId"],
+            "sizeId": order_data["sizeId"],
+            "styleId": order_data["styleId"],
+        }
+        posted_order = json.dumps(order)
+
+        if posted_order_id:
+            return handler.response(posted_order, status.HTTP_201_SUCCESS_CREATED.value)
+        else:
+            return handler.response(
+                "Problem encountered when trying to carry out post request",
+                status.HTTP_500_SERVER_ERROR.value,
+            )
