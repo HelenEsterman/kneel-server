@@ -76,43 +76,41 @@ class OrderView:
             if "_expand" in url["query_params"]:
                 orders_list = []
                 for order in orders:
-                    if "metal" in url["query_params"]["_expand"]:
-                        sql = """
-                                SELECT
-                                m.id,
-                                m.metal,
-                                m.price
-                                FROM Metals m
-                                WHERE m.id = ?"""
-                        metal_query_results = db_get_single(sql, order["metalId"])
-                        metal_query_results_dict = dict(metal_query_results)
-                        order["metal"] = metal_query_results_dict
-                        orders_list.append(order)
-                        orders_json_array = json.dumps(orders_list)
-                    if "size" in url["query_params"]["_expand"]:
-                        sql = """
-                                SELECT
-                                s.id,
-                                s.caret,
-                                s.price
-                                FROM Sizes s
-                                WHERE s.id = ?"""
-                        size_query_results = db_get_single(sql, order["sizeId"])
-                        size_query_results_dict = dict(size_query_results)
-                        order["size"] = size_query_results_dict
-                        orders_list.append(order)
-                        orders_json_array = json.dumps(orders_list)
-                    if "style" in url["query_params"]["_expand"]:
-                        sql = """
-                                SELECT
-                                s.id,
-                                s.style,
-                                s.price
-                                FROM Styles s
-                                WHERE s.id = ?"""
-                        style_query_results = db_get_single(sql, order["styleId"])
-                        style_query_results_dict = dict(style_query_results)
-                        order["style"] = style_query_results_dict
+                    order_id = order["id"]
+                    if order_id not in orders_list:
+                        if "metal" in url["query_params"]["_expand"]:
+                            sql = """
+                                    SELECT
+                                    m.id,
+                                    m.metal,
+                                    m.price
+                                    FROM Metals m
+                                    WHERE m.id = ?"""
+                            metal_query_results = db_get_single(sql, order["metalId"])
+                            metal_query_results_dict = dict(metal_query_results)
+                            order["metal"] = metal_query_results_dict
+                        if "size" in url["query_params"]["_expand"]:
+                            sql = """
+                                    SELECT
+                                    s.id,
+                                    s.caret,
+                                    s.price
+                                    FROM Sizes s
+                                    WHERE s.id = ?"""
+                            size_query_results = db_get_single(sql, order["sizeId"])
+                            size_query_results_dict = dict(size_query_results)
+                            order["size"] = size_query_results_dict
+                        if "style" in url["query_params"]["_expand"]:
+                            sql = """
+                                    SELECT
+                                    s.id,
+                                    s.style,
+                                    s.price
+                                    FROM Styles s
+                                    WHERE s.id = ?"""
+                            style_query_results = db_get_single(sql, order["styleId"])
+                            style_query_results_dict = dict(style_query_results)
+                            order["style"] = style_query_results_dict
                         orders_list.append(order)
                         orders_json_array = json.dumps(orders_list)
             return handler.response(orders_json_array, status.HTTP_200_SUCCESS.value)
