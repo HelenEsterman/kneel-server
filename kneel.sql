@@ -56,10 +56,17 @@ SELECT * FROM `Orders`;
 
 
 SELECT * FROM `Metals`;
-SELECT 
-                o.id,
-                o.metalId,
-                o.sizeId,
-                o.styleId
-                FROM `Orders` o
-                WHERE o.id = 2;
+SELECT
+                    o.id,
+                    o.metalId,
+                    o.sizeId,
+                    o.styleId,
+                    s.id style_id,
+                    s.style,
+                    s.price
+                    FROM `Orders` o
+                    LEFT JOIN Styles s
+                    ON o.styleId = s.id
+                    WHERE o.id = 1;
+
+
